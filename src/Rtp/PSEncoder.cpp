@@ -11,7 +11,9 @@
 #if defined(ENABLE_RTPPROXY)
 
 #include "PSEncoder.h"
+#include "Common/config.h"
 #include "Extension/H264.h"
+#include "Extension/CommonRtp.h"
 #include "Rtsp/RtspMuxer.h"
 
 using namespace toolkit;
@@ -32,7 +34,7 @@ PSEncoderImp::~PSEncoderImp() {
     InfoL << this << " " << printSSRC(_rtp_encoder->getSsrc());
 }
 
-void PSEncoderImp::onWrite(std::shared_ptr<Buffer> buffer, uint32_t stamp, bool key_pos) {
+void PSEncoderImp::onWrite(std::shared_ptr<Buffer> buffer, uint64_t stamp, bool key_pos) {
     if (!buffer) {
         return;
     }

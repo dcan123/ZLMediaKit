@@ -55,9 +55,10 @@ typedef void(API_CALL *on_mk_frame_data_release)(void *user_data, char *ptr);
  * @param user_data data指针free释放回调用户指针
  * @return frame对象引用
  */
-API_EXPORT mk_frame API_CALL mk_frame_create(int codec_id, uint32_t dts, uint32_t pts, const char *data, size_t size,
+API_EXPORT mk_frame API_CALL mk_frame_create(int codec_id, uint64_t dts, uint64_t pts, const char *data, size_t size,
                                             on_mk_frame_data_release cb, void *user_data);
-
+API_EXPORT mk_frame API_CALL mk_frame_create2(int codec_id, uint64_t dts, uint64_t pts, const char *data, size_t size,
+                                             on_mk_frame_data_release cb, void *user_data, on_user_data_free user_data_free);
 /**
  * 减引用frame对象
  * @param frame 帧对象引用
@@ -104,12 +105,12 @@ API_EXPORT size_t API_CALL mk_frame_get_data_prefix_size(mk_frame frame);
 /**
  * 获取解码时间戳，单位毫秒
  */
-API_EXPORT uint32_t API_CALL mk_frame_get_dts(mk_frame frame);
+API_EXPORT uint64_t API_CALL mk_frame_get_dts(mk_frame frame);
 
 /**
  * 获取显示时间戳，单位毫秒
  */
-API_EXPORT uint32_t API_CALL mk_frame_get_pts(mk_frame frame);
+API_EXPORT uint64_t API_CALL mk_frame_get_pts(mk_frame frame);
 
 /**
  * 获取帧flag，请参考 MK_FRAME_FLAG
